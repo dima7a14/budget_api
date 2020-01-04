@@ -48,6 +48,8 @@ class User(AbstractUser):
     email = models.EmailField('Email address', unique=True, blank=False)
     first_name = models.CharField('First name', max_length=30, blank=False)
     last_name = models.CharField('Last name', max_length=150, blank=False)
+    created_at = models.DateTimeField('Created at', auto_now_add=True)
+    updated_at = models.DateTimeField('Updated at', auto_now=True)
 
     objects = UserManager()
 

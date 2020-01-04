@@ -16,7 +16,8 @@ class UserSerializer(serializers.ModelSerializer):
             'last_name',
             'is_staff',
             'is_active',
-            'last_login',
+            'created_at',
+            'updated_at',
         )
         model = User
 
