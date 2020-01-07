@@ -1,5 +1,4 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 
 from .forms import UserCreationForm, UserChangeForm
@@ -12,7 +11,7 @@ class UserAdmin(DjangoUserAdmin):
     add_form = UserCreationForm
     form = UserChangeForm
     model = User
-    list_display = ['email', 'first_name', 'last_name', 'is_staff']
+    list_display = ['email', 'first_name', 'last_name', 'created_at', 'updated_at', 'is_staff']
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal info', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
@@ -25,4 +24,6 @@ class UserAdmin(DjangoUserAdmin):
         }),
     )
     search_fields = ('email', 'first_name', 'last_name')
-    ordering = ('email',)
+    ordering = ('created_at', 'updated_at')
+
+

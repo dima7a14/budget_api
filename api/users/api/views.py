@@ -11,12 +11,6 @@ class ListUser(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
 
-    def list(self, request):
-        queryset = self.get_queryset()
-        serializer = UserSerializer(queryset, many=True)
-
-        return Response(serializer.data)
-
 
 class DetailUser(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.User.objects.all()
@@ -40,3 +34,4 @@ class LogoutUser(generics.GenericAPIView):
         sz.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+

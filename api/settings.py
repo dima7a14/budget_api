@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'api.users',
+    'api.families',
 ]
 
 MIDDLEWARE = [
@@ -145,6 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.TemplateHTMLRenderer',
     ),
+    'DEFAULT_PAGINATION_CLASS': 'api.core.pagination.DefaultPagination',
 }
 
 SIMPLE_JWT = {
