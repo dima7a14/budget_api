@@ -23,6 +23,12 @@ class CreateUser(generics.CreateAPIView):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
 
+    def post(self, request, *args, **kwargs):
+        """
+        Register user in system.
+        """
+        return self.create(request, *args, **kwargs)
+
 
 class LogoutUser(generics.GenericAPIView):
     serializer_class = RefreshTokenSerializer
