@@ -1,4 +1,5 @@
-from rest_framework import generics, status
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
@@ -6,38 +7,26 @@ from api.users import models
 from .serializers import UserSerializer, RefreshTokenSerializer
 
 
-class ListUser(generics.ListAPIView):
-    queryset = models.User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class DetailUser(generics.RetrieveUpdateDestroyAPIView):
-    queryset = models.User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated,)
-
-
-class CreateUser(generics.CreateAPIView):
-    queryset = models.User.objects.all()
+class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated, IsAdminUser)
+    queryset = models.User.objects.all()
 
-    def post(self, request, *args, **kwargs):
-        """
-        Register user in system.
-        """
-        return self.create(request, *args, **kwargs)
-
-
-class LogoutUser(generics.GenericAPIView):
-    serializer_class = RefreshTokenSerializer
-    permission_classes = (IsAuthenticated,)
-
-    def post(self, request, *args):
-        sz = self.get_serializer(data=request.data)
+    @action(detail=False, methods=["post"], permission_classes=[IsAuthenticated])
+    def logout(self, request, pk=None):
+        sz = RefreshTokenSerializer(data=request.data)
         sz.is_valid(raise_exception=True)
         sz.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+    @action(detail=False, methods=["post"], permission_classes=[])
+    def register(self, request, pk=None):
+        return self.create(request)
+
+    @action(detail=False, methods=["get"], permission_classes=[IsAuthenticated])
+    def info(self, request, pk=None):
+        current_user = request.user
+        sz = self.get_serializer(current_user)
+
+        return Response(sz.data)
