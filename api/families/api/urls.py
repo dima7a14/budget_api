@@ -1,8 +1,8 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
-from .views import ListFamily, DetailFamily
+from .views import FamilyViewSet
 
-urlpatterns = [
-    path('', ListFamily.as_view(), name="get-families"),
-    path('<int:pk>', DetailFamily.as_view(), name="get-family-by-id"),
-]
+
+router = DefaultRouter()
+router.register(r'families', FamilyViewSet, basename="family")
+
