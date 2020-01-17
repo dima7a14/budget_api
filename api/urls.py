@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -41,4 +42,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/users/', include('api.users.api.urls')),
     path('api/', include(family_router.urls)),
+    *staticfiles_urlpatterns(),
 ]
