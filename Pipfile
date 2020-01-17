@@ -44,6 +44,7 @@ PyJWT = "~=1.7.1"
 PyYAML = "~=5.3"
 "ruamel.yaml" = "~=0.16.5"
 gunicorn = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.8"

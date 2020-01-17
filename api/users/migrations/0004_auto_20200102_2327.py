@@ -6,6 +6,7 @@ from django.contrib.auth.hashers import make_password
 
 USERS = [
     {
+        "username": "testing_user",
         "first_name": "test",
         "last_name": "user",
         "email": "test@test.com",
