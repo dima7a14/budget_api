@@ -5,6 +5,7 @@ services:
     image: postgres:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    env_file: .env-db
   api:
     build: .
     command: gunicorn api.wsgi:application --bind 0.0.0.0:8000
@@ -14,6 +15,19 @@ services:
       - 8000:8000
     depends_on:
       - db
+    expose:
+      - 8000
+    env_file: .env
+#  redis:
+#    image: redis:alpine
+#    ports:
+#      - 6379:6379
+  nginx:
+    build: ./nginx
+    ports:
+      - 8001:80
+    depends_on:
+      - api
 
 volumes:
   postgres_data:

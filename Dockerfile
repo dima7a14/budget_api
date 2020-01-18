@@ -7,8 +7,6 @@ ENV PYTHONUNBUFFERED 1
 ENV LANG C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV DJANGO_DEBUG=True
-
 # Install system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
         tzdata \
