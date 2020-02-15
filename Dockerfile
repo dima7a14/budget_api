@@ -27,4 +27,6 @@ RUN pipenv install --system
 
 COPY . /code/
 
+RUN python manage.py migrate
+
 EXPOSE 8888
