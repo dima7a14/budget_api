@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from datetime import timedelta
+import django_heroku
 
 from .secret_key import generate_secret_key
 
@@ -178,3 +179,5 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+django_heroku.settings(locals())
