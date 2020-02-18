@@ -20,8 +20,6 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
-from api.families.api.urls import router as family_router
-
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -41,6 +39,5 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name="schema-redoc"),
     path('admin/', admin.site.urls),
     path('api/users/', include('api.users.api.urls')),
-    path('api/', include(family_router.urls)),
     *staticfiles_urlpatterns(),
 ]
