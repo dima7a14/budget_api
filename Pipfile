@@ -47,6 +47,7 @@ gunicorn = "*"
 psycopg2 = "*"
 dj-database-url = "*"
 django-heroku = "*"
+django-money = "*"
 
 [requires]
 python_version = "3.8"

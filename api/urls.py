@@ -24,7 +24,7 @@ from drf_yasg import openapi
 schema_view = get_schema_view(
     openapi.Info(
         title="Family Budget API",
-        default_version="v0.0.2",
+        default_version="v0.0.3",
         description="API for Family Budget app",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="dimadanylyuk@gmail.com"),
@@ -36,8 +36,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name="schema-swagger-ui"),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name="schema-redoc"),
     path('admin/', admin.site.urls),
-    path('api/users/', include('api.users.api.urls')),
+    path('api/auth/', include('api.authentication.urls')),
+    path('api/users/', include('api.users.urls')),
+    path('api/accounts/', include('api.accounts.urls')),
     *staticfiles_urlpatterns(),
 ]
