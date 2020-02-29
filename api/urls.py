@@ -34,11 +34,12 @@ schema_view = get_schema_view(
     permission_classes=(permissions.AllowAny,),
 )
 
+
 urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name="schema-swagger-ui"),
     path('admin/', admin.site.urls),
-    path('api/auth/', include('api.authentication.urls')),
-    path('api/users/', include('api.users.urls')),
-    path('api/accounts/', include('api.accounts.urls')),
+    path('api/', include(('api.authentication.urls', 'auth'), namespace='auth')),
+    path('api/', include(('api.users.urls', 'users'), namespace='users')),
+    path('api/', include(('api.accounts.urls', 'accounts'), namespace='accounts')),
     *staticfiles_urlpatterns(),
 ]

@@ -48,6 +48,7 @@ psycopg2 = "*"
 dj-database-url = "*"
 django-heroku = "*"
 django-money = "*"
+drf-nested-routers = "*"
 
 [requires]
 python_version = "3.8"
