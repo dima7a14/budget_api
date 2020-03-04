@@ -37,8 +37,11 @@ class Category(models.Model):
     type = models.CharField('Type', choices=TYPES, default=CUSTOM, max_length=3)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    class Meta:
+        verbose_name_plural = 'Categories'
+
     def __str__(self):
-        return f'{self.name} ({self.TYPES[self.type]})'
+        return f'{self.name} ({self.get_type_display()})'
 
 
 class Transaction(models.Model):
@@ -51,3 +54,6 @@ class Transaction(models.Model):
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.name
