@@ -5,6 +5,7 @@ from api.users.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(allow_blank=False, allow_null=False, write_only=True, trim_whitespace=True)
+    is_active = serializers.BooleanField(read_only=True, default=True)
 
     class Meta:
         fields = (

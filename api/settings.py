@@ -168,6 +168,9 @@ SIMPLE_JWT = {
     'USER_ID_CLAIM': 'user_id',
 }
 
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.AllowAllUsersModelBackend',
+]
 AUTH_USER_MODEL = 'users.User'
 
 django_heroku.settings(locals())
