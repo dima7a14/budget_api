@@ -20,9 +20,9 @@ class UserDetail(generics.GenericAPIView):
 
     def get(self, request):
         current_user = request.user
-        sz = self.get_serializer(current_user)
+        serializer = self.get_serializer(current_user)
 
-        return Response(sz.data)
+        return Response(serializer.data)
 
 
 class UserUpdate(generics.UpdateAPIView, generics.DestroyAPIView):

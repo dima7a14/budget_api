@@ -49,6 +49,7 @@ dj-database-url = "*"
 django-heroku = "*"
 django-money = "*"
 drf-nested-routers = "*"
+pylint-django = "*"
 
 [requires]
 python_version = "3.8"
