@@ -43,8 +43,6 @@ class UserSerializer(serializers.ModelSerializer):
         old_pass = attrs.get('password', None)
         new_pass = attrs.get('new_password', None)
 
-        print(dir(self.context['request']))
-
         if old_pass is not None and self.context['request'].method != 'POST':
             if new_pass is None:
                 raise serializers.ValidationError({
