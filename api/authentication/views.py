@@ -11,7 +11,7 @@ from .serializers import RefreshTokenSerializer
 class AuthViewSet(viewsets.GenericViewSet):
     serializer_class = Serializer
 
-    @action(detail=False, methods=["post"], permission_classes=[IsAuthenticated])
+    @action(detail=False, methods=["post"], permission_classes=[])
     def logout(self, request, pk=None):
         sz = RefreshTokenSerializer(data=request.data)
         sz.is_valid(raise_exception=True)
