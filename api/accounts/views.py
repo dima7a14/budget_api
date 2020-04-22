@@ -23,15 +23,13 @@ class TransactionViewSet(ModelViewSet):
 
     def get_queryset(self):
         """Should return queryset with transactions for the current account."""
-        return Transaction.objects.filter(account__id=self.kwargs.get('account_pk', 0))
+        return Transaction.objects.filter(account__owner__id=self.request.user.id)
 
     def perform_create(self, serializer):
-        account = Account.objects.filter(id=self.kwargs.get('account_pk', 0)).first()
-        serializer.save(created_by=self.request.user, account=account)
+        serializer.save(created_by=self.request.user)
 
     def perform_update(self, serializer):
-        account = Account.objects.filter(id=self.kwargs.get('account_pk', 0)).first()
-        serializer.save(created_by=self.request.user, account=account)
+        serializer.save(created_by=self.request.user)
 
 
 class CategoryViewSet(ModelViewSet):

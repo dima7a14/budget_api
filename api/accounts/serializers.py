@@ -30,8 +30,8 @@ class AccountSerializer(serializers.ModelSerializer):
 
 class TransactionSerializer(serializers.ModelSerializer):
     created_by_id = serializers.IntegerField(read_only=True)
-    account_id = serializers.IntegerField(read_only=True)
-    category_id = serializers.IntegerField(read_only=True)
+    account_id = serializers.IntegerField(required=True)
+    category_id = serializers.IntegerField(required=False)
     value = serializers.DecimalField(max_digits=14, decimal_places=2, coerce_to_string=False, required=True)
 
     class Meta:
@@ -46,7 +46,7 @@ class TransactionSerializer(serializers.ModelSerializer):
             'created_by_id',
             'category_id',
         )
-        read_only_fields = ['id', 'created_at', 'updated_at', 'created_by_id', 'account_id']
+        read_only_fields = ['id', 'created_at', 'updated_at', 'created_by_id']
 
         model = Transaction
         depth = 1
