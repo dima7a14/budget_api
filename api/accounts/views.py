@@ -2,7 +2,8 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Account, Transaction, Category
-from .serializers import AccountSerializer, TransactionSerializer, CategorySerializer
+from .serializers import AccountSerializer, TransactionSerializer, \
+                         CategorySerializer
 
 
 class AccountViewSet(ModelViewSet):
@@ -26,10 +27,10 @@ class TransactionViewSet(ModelViewSet):
         return Transaction.objects.filter(account__owner__id=self.request.user.id)
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        serializer.save(created_by=self.request.user, context={'request': self.request})
 
     def perform_update(self, serializer):
-        serializer.save(created_by=self.request.user)
+        serializer.save(created_by=self.request.user, context={'request': self.request})
 
 
 class CategoryViewSet(ModelViewSet):

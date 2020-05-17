@@ -19,6 +19,7 @@ class AccountAdmin(admin.ModelAdmin):
 class TransactionAdmin(admin.ModelAdmin):
     date_hierarchy = 'updated_at'
     readonly_fields = ('created_at', 'updated_at')
+    list_display = ('name', 'updated_at', 'value', 'account', 'created_by')
 
 
 class CategoryAdmin(admin.ModelAdmin):
